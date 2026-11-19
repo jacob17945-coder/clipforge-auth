@@ -1,2 +1,15 @@
 <!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ClipForge login</title>
-<h2>Almost done</h2><p>Copy the FULL address from the address bar above and paste it into ClipForge.</p>
+<body style="font-family:sans-serif;padding:40px">
+<h2>Almost done</h2>
+<p id="msg">Handing the login to ClipForge on this computer...</p>
+<p><a id="go" href="#">Click here if nothing happens</a> (the ClipForge dashboard must be running).</p>
+<p style="color:#666">Fallback: copy the FULL address from the address bar above and paste it into ClipForge.</p>
+<script>
+  // The login code goes straight to the ClipForge dashboard on this PC (localhost); it is never sent anywhere else.
+  var q = location.search;
+  var target = "http://127.0.0.1:8765/oauth/callback" + q;
+  document.getElementById("go").href = target;
+  if (q.indexOf("code=") !== -1 || q.indexOf("error=") !== -1) { location.replace(target); }
+  else { document.getElementById("msg").textContent = "No login code in this address."; }
+</script>
+</body>
